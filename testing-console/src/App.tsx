@@ -1,41 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, useCallback, useEffect } from 'react';
 
 const url = 'https://pokeapi.co/api/v2/';
 
 const Test = (): JSX.Element => {
-  const [state, setState] = React.useState<{ response: Promise<Response> }>();
-  const getPokemon = React.useCallback(async (): Promise<void> => {
+  const [state, setState] = useState<{ response: Promise<Response> }>();
+  const getPokemon = useCallback(async (): Promise<void> => {
     const data = await fetch(url);
     setState({ response: (await data.json()) as Promise<Response> });
   }, []);
-  React.useEffect(() => {
+  useEffect(() => {
     void getPokemon();
   }, [getPokemon]);
-  React.useEffect(() => {
+  useEffect(() => {
     console.log('state', state?.response);
   }, [state]);
-  return <div>this is test </div>;
+
+  const handleSelect = (e: React.MouseEvent<HTMLButtonElement>): void => {
+    console.log('🚀 ~ file: App.tsx ~ line 23 ~ handleSelect ~ handleSelect', e);
+  };
+  return (
+    <button type="button" onClick={handleSelect} value="test">
+      this is test
+    </button>
+  );
 };
 
 function App(): JSX.Element {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Test />
-        </a>
-      </header>
+      <Test />
     </div>
   );
 }
