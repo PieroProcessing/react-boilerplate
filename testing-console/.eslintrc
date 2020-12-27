@@ -29,17 +29,11 @@
     }
   },
   "rules": {
+    "indent": "off",
     "object-curly-spacing": [
       "warn",
       "always"
-    ],
-    "no-unused-vars": [
-      "warn",
-      {
-        "vars": "all",
-        "args": "none"
-      }
-    ],
+    ], 
     "@typescript-eslint/semi": [
       "error"
     ],
@@ -54,6 +48,14 @@
       "error",
       {
         "ignoreRestArgs": true
+      }
+    ],
+    "@typescript-eslint/naming-convention":[
+      "error",
+      {
+        "selector": "function",
+        "format": ["camelCase"],
+        "leadingUnderscore": "allow"
       }
     ],
     "@typescript-eslint/consistent-type-definitions": "error", 
@@ -75,21 +77,7 @@
     ],
     "no-return-await": "off",
     "no-void": "off",
-    "max-len": [
-      "warn",
-      {
-        "code": 200,
-        "ignoreStrings": true,
-        "ignoreTemplateLiterals": true,
-        "ignoreComments": true
-      }
-    ],
-    "no-plusplus": [
-      "error",
-      {
-        "allowForLoopAfterthoughts": true
-      }
-    ], 
+    "no-underscore-dangle": "off",
     "no-console": [
       "error",
       {
@@ -115,7 +103,22 @@
               "context"
           ]
       }
-  ],
+    ],
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ], 
+    "max-len": [
+      "warn",
+      {
+        "code": 200,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreComments": true
+      }
+    ],
     "react-hooks/exhaustive-deps": "warn",
     "react-hooks/rules-of-hooks": "error",
     "react/destructuring-assignment": "warn",
