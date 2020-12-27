@@ -1,63 +1,19 @@
-import { useEffect } from 'react';
-import { useQuery } from 'react-query';
+/*
+ * todo: finish cache data with options and pagination https://www.youtube.com/watch?v=K8kgh5C3WP8&list=PL4cUxeGkcC9jpi7Ptjl5b50p9gLjOFani&index=5
+ */
 
-const url = 'https://pokeapi.co/api/v2/';
-const fetchPokemon = async (): Promise<Response> => {
-  const data = await fetch(url);
-  return data.json() as Promise<Response>;
-};
+import UseQueryExample from './pages/react-query/use-query.example';
 
-const obj = {
-  key1: 'string',
-  key2: {
-    key2_1: 'string',
-  },
-};
-const Test = (): JSX.Element => {
-  // const [state, setState] = useState<{ response: Promise<Response> }>();
-  const { data, status } = useQuery('pokemons', fetchPokemon);
-  useEffect(() => {
-    // void getPokemon();
-    console.log('status', status);
-  }, [status]);
-  useEffect(() => {
-    console.log('data', data);
-  }, [data]);
+/**
+ *  todo: post https://www.youtube.com/watch?v=vzLmQn19kS4
+ */
 
-  const handleSelect = ({ currentTarget }: React.MouseEvent<HTMLElement>): void => {
-    console.log(
-      '🚀 ~ file: App.tsx ~ line 23 ~ handleSelect ~ handleSelect',
-      currentTarget.getAttribute('value'),
-    );
-  };
-  const handleClick = ({ currentTarget }: React.MouseEvent<HTMLElement>): void => {
-    console.log(
-      '🚀 ~ file: App.tsx ~ line 33 ~ handleClick ~ handleClick',
-      currentTarget.getAttribute('data-value'),
-    );
-  };
-  const handleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>): void => {
-    console.log('🚀 ~ file: App.tsx ~ line 42 ~ handleChange ~ handleChange', value);
-  };
+const App = (): JSX.Element => {
   return (
-    <>
-      <button type="button" onClick={handleSelect} value="value1">
-        this is test
-      </button>
-      <div onClick={handleClick} data-value={obj} aria-hidden="true">
-        this is test
-      </div>
-      <input type="text" onChange={handleChange} />
-    </>
-  );
-};
-
-function App(): JSX.Element {
-  return (
-    <div className="app-w">
-      <Test />
+    <div className="container">
+      <UseQueryExample />
     </div>
   );
-}
+};
 
 export default App;
