@@ -1,14 +1,30 @@
+import { useEffect, useState } from 'react';
+import { QueryFunctionContext, useQuery, useQueryClient } from 'react-query';
+import Pagination from '../../components/pagination.component';
 import { Response } from '../../models';
+import { ENDPOINT, setUrlQeueryParams, _fetch } from '../../services';
 
-interface QueryPaginatedModel {
-  isLoading: boolean;
-  isError: boolean;
-  isSuccess: boolean;
-  data: Response | undefined;
-  handleRedirect: ({ currentTarget }: React.MouseEvent<HTMLElement>) => void;
-}
+const QueryPaginated = (): JSX.Element => {
+  const queryClient = useQueryClient();
+  const [page, setPage] = useState<number>(0);
 
-const QueryPaginated = ({ isLoading, isError, isSuccess, data, handleRedirect }: QueryPaginatedModel): JSX.Element => {
+  const { data, isLoading, isError, isSuccess } = useQuery<Response, QueryFunctionContext>(
+    ['paginated_pokemon_list', { url: `${ENDPOINT.pokemonList}?${setUrlQeueryParams({ offset: String(page), limit: '200' }).toString()}` }],
+    _fetch,
+    {
+      keepPreviousData: true,
+    },
+  );
+  useEffect((): (() => void) => {
+    return (): Promise<void> => queryClient.cancelQueries('pokemons'); /// check if necessary and dont cache data on component destroy;
+  }, [queryClient]);
+  const handleRedirect = ({ currentTarget }: React.MouseEvent<HTMLElement>): void => {
+    // console.log('🚀 ~ file: use-query.example.tsx ~ line 34 ~ handleRedirect ~ handleRedirect', currentTarget.getAttribute('data-value'));
+  };
+  const handlePagination = ({ currentTarget }: React.MouseEvent<HTMLElement>): void => {
+    const accumulator = currentTarget.getAttribute('value');
+    setPage((old) => Math.max(old + Number(accumulator), 0));
+  };
   return (
     <section>
       {isLoading && <div className="text-warning">data loading....</div>}
@@ -22,27 +38,7 @@ const QueryPaginated = ({ isLoading, isError, isSuccess, data, handleRedirect }:
       ) : (
         <div>All Pokemon are extinted. Sorry, try with Digimons</div>
       )}
-      <nav aria-label="Page navigation example">
-        <ul className="pagination justify-content-center">
-          <li className="page-item disabled">
-            <button type="button" className="page-link" value={-1} aria-disabled="true">
-              Previous
-            </button>
-          </li>
-
-          <li className="page-item">
-            <button type="button" className="page-link">
-              1
-            </button>
-          </li>
-
-          <li className="page-item">
-            <button type="button" className="page-link" value={+1}>
-              Next
-            </button>
-          </li>
-        </ul>
-      </nav>
+      <Pagination page={page} handlePagination={handlePagination} data={data} />
     </section>
   );
 };
