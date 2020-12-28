@@ -2,7 +2,7 @@ import { QueryFunctionContext } from 'react-query';
 import { Response } from '../models';
 
 interface QueryKeyParams {
-  url: string;
+  [key: string]: string;
 }
 const _fetch = async ({ queryKey }: QueryFunctionContext<QueryKeyParams[]>): Promise<Response> => {
   const [, query] = queryKey;
