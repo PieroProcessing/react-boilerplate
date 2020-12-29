@@ -18,13 +18,6 @@ const QueryPaginated = (): JSX.Element => {
     },
   );
   useEffect((): (() => void) => {
-    console.log(
-      '🚀 ~ file: use-query.paginated.tsx ~ line 12 ~ isLoading, isError, isSuccess, isFetching ',
-      isLoading,
-      isError,
-      isSuccess,
-      isFetching,
-    );
     return (): Promise<void> => queryClient.cancelQueries('pokemons'); /// check if necessary and dont cache data on component destroy;
   }, [isLoading, isError, isSuccess, isFetching, queryClient]);
   const handleRedirect = ({ currentTarget }: React.MouseEvent<HTMLElement>): void => {
