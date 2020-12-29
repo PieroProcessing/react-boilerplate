@@ -4,20 +4,29 @@ import Pagination from '../../components/pagination.component';
 import { Response } from '../../models';
 import { ENDPOINT, setUrlQeueryParams, _fetch } from '../../services';
 
+const offset = 20;
+
 const QueryPaginated = (): JSX.Element => {
   const queryClient = useQueryClient();
   const [page, setPage] = useState<number>(0);
 
-  const { data, isLoading, isError, isSuccess } = useQuery<Response, QueryFunctionContext>(
-    ['paginated_pokemon_list', { url: `${ENDPOINT.pokemonList}?${setUrlQeueryParams({ offset: String(page), limit: '200' }).toString()}` }],
+  const { data, isLoading, isError, isSuccess, isFetching } = useQuery<Response, QueryFunctionContext>(
+    ['paginated_pokemon_list', { url: `${ENDPOINT.pokemonList}?${setUrlQeueryParams({ offset: String(page), limit: String(offset) }).toString()}` }],
     _fetch,
     {
       keepPreviousData: true,
     },
   );
   useEffect((): (() => void) => {
+    console.log(
+      '🚀 ~ file: use-query.paginated.tsx ~ line 12 ~ isLoading, isError, isSuccess, isFetching ',
+      isLoading,
+      isError,
+      isSuccess,
+      isFetching,
+    );
     return (): Promise<void> => queryClient.cancelQueries('pokemons'); /// check if necessary and dont cache data on component destroy;
-  }, [queryClient]);
+  }, [isLoading, isError, isSuccess, isFetching, queryClient]);
   const handleRedirect = ({ currentTarget }: React.MouseEvent<HTMLElement>): void => {
     // console.log('🚀 ~ file: use-query.example.tsx ~ line 34 ~ handleRedirect ~ handleRedirect', currentTarget.getAttribute('data-value'));
   };
@@ -27,7 +36,7 @@ const QueryPaginated = (): JSX.Element => {
   };
   return (
     <section>
-      {isLoading && <div className="text-warning">data loading....</div>}
+      {(isLoading || isFetching) && <div className="text-warning">data loading....</div>}
       {isError && <div className="text-danger">ops... please try later...</div>}
       {isSuccess && data?.results.length ? (
         data?.results.map((pokemon) => (
@@ -38,7 +47,7 @@ const QueryPaginated = (): JSX.Element => {
       ) : (
         <div>All Pokemon are extinted. Sorry, try with Digimons</div>
       )}
-      <Pagination page={page} handlePagination={handlePagination} data={data} />
+      <Pagination page={page} offset={offset} handlePagination={handlePagination} data={data} />
     </section>
   );
 };
