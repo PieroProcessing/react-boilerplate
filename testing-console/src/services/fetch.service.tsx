@@ -1,12 +1,11 @@
 import { QueryFunctionContext } from 'react-query';
-import { Response } from '../models';
 
 interface QueryKeyParams {
   [key: string]: string;
 }
-const _fetch = async ({ queryKey }: QueryFunctionContext<QueryKeyParams[]>): Promise<Response> => {
+const _fetch = async ({ queryKey }: QueryFunctionContext<QueryKeyParams[]>): Promise<any> => {
   const [, query] = queryKey;
   const data = await fetch(query.url);
-  return data.json() as Promise<Response>;
+  return await data.json();
 };
 export default _fetch;
