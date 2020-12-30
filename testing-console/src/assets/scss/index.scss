@@ -10,6 +10,7 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap-utilities.scss";
 @import "../../../node_modules/bootstrap/scss/buttons";
 @import "../../../node_modules/bootstrap/scss/pagination";
+@import "../../../node_modules/bootstrap/scss/card";
 // Optional
 // @import "../../../node_modules/bootstrap/scss/root";
 // @import "../../../node_modules/bootstrap/scss/reboot";
@@ -18,3 +19,4 @@
 // @import "../../../node_modules/bootstrap/scss/containers";
 // @import "../../../node_modules/bootstrap/scss/grid";
 @import './style/custom.buttons';
+@import './style/grid';
