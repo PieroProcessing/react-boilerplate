@@ -3,9 +3,9 @@ export interface Result {
   url: string;
 }
 
-export interface Response {
+export interface PokemonResponse {
   count: number;
   next: string;
-  previous?: any;
+  previous: string | undefined;
   results: Result[];
 }
