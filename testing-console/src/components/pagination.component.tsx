@@ -3,27 +3,29 @@ import { Response } from '../models';
 interface PaginationModel {
   page: number;
   handlePagination: ({ currentTarget }: React.MouseEvent<HTMLElement>) => void;
-  data: Response | undefined;
   offset: number;
+  next: string | undefined;
+  first: number;
+  count: number | undefined;
 }
-const Pagination = ({ page, handlePagination, offset, data }: PaginationModel): JSX.Element => {
+const Pagination = ({ page, handlePagination, offset, first, count, next }: PaginationModel): JSX.Element => {
   return (
     <nav aria-label="row">
       <ul className="pagination justify-content-between">
-        <li className={`page-item ${page === 0 ? 'disabled' : ''}`}>
-          <button type="button" className="page-link" onClick={handlePagination} value={-offset} disabled={page === 0}>
+        <li className={`page-item ${page === first ? 'disabled' : ''}`}>
+          <button type="button" className="page-link" onClick={handlePagination} value={-offset} disabled={page === first}>
             Previous
           </button>
         </li>
 
         <li className="page-item">
           <div className="d-flex align-center text-primary">
-            {page} / {data?.count}
+            {page} / {count}
           </div>
         </li>
 
-        <li className={`page-item ${!data?.next ? 'disabled' : ''}`}>
-          <button type="button" className="page-link" onClick={handlePagination} value={offset} disabled={!data?.next}>
+        <li className={`page-item ${next ? '' : 'disabled'}`}>
+          <button type="button" className="page-link" onClick={handlePagination} value={offset} disabled={!next}>
             Next
           </button>
         </li>
