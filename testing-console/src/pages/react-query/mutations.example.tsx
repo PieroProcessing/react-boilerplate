@@ -23,7 +23,7 @@ const PostRequest = (): JSX.Element => {
     page: String(page),
     per_page: String(12),
   });
-  const { mutate } = usePost(queryClient, queryKeyPostRequest);
+  const add = usePost(queryClient, queryKeyPostRequest);
 
   useEffect((): (() => void) => {
     return (): Promise<void> => queryClient.cancelQueries(queryKeyPostRequest); /// check if necessary and dont cache data on component destroy;
@@ -38,7 +38,7 @@ const PostRequest = (): JSX.Element => {
   const handleMutations = ({ currentTarget }: React.MouseEvent<HTMLElement>): void => {
     const newData = currentTarget.getAttribute('data-value');
     if (newData) {
-      mutate({ url: ENDPOINT.requestList, body: JSON.parse(newData) as RequestData });
+      add.mutate({ url: ENDPOINT.requestList, body: JSON.parse(newData) as RequestData });
     }
   };
 
