@@ -1,6 +1,5 @@
-interface UrlQueryParamsModel {
-  [key: string]: string;
-}
+import { UrlQueryParamsModel } from '../models';
+
 const setUrlQeueryParams = (params: UrlQueryParamsModel): URLSearchParams => {
   return new URLSearchParams(params);
 };
