@@ -34,3 +34,6 @@ export interface PostBody {
   name: string;
   job: string;
 }
+export interface UrlQueryParamsModel {
+  [key: string]: string;
+}
