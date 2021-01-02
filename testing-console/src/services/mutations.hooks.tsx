@@ -1,11 +1,20 @@
 import { useQuery, useMutation, QueryFunctionContext, QueryObserverResult, QueryClient, UseMutationResult } from 'react-query';
-import { RequestResponse, UrlQueryParamsModel, PostParams } from '../models';
+import { RequestResponse, UrlQueryParamsModel, PostParams, PokemonResponse } from '../models';
+import { XOR } from '../models/utils';
 import _fetch from './fetch.service';
 import _post from './post.service';
 import setUrlQeueryParams from './serch-params.service';
 
-const useList = (key: string, url: string, query: UrlQueryParamsModel): QueryObserverResult<RequestResponse, QueryFunctionContext> => {
-  return useQuery<RequestResponse, QueryFunctionContext>([key, { url: `${url}?${setUrlQeueryParams(query).toString()}` }], _fetch, {});
+const useList = (
+  key: string,
+  url: string,
+  query: UrlQueryParamsModel,
+): QueryObserverResult<XOR<PokemonResponse, RequestResponse>, QueryFunctionContext> => {
+  return useQuery<XOR<PokemonResponse, RequestResponse>, QueryFunctionContext>(
+    [key, { url: `${url}?${setUrlQeueryParams(query).toString()}` }],
+    _fetch,
+    {},
+  );
 };
 
 const usePost = (

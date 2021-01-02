@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { QueryFunctionContext, useQuery, useQueryClient } from 'react-query';
 import Pagination from '../../components/pagination.component';
-import { PokemonResponse } from '../../models';
+import { PokemonResponse, RequestResponse } from '../../models';
+import { XOR } from '../../models/utils';
 import { ENDPOINT, setUrlQeueryParams, _fetch } from '../../services';
 
 const offset = 20;
@@ -10,7 +11,7 @@ const QueryPaginated = (): JSX.Element => {
   const queryClient = useQueryClient();
   const [page, setPage] = useState<number>(0);
 
-  const { data, isLoading, isError, isSuccess, isFetching } = useQuery<PokemonResponse, QueryFunctionContext>(
+  const { data, isLoading, isError, isSuccess, isFetching } = useQuery<XOR<RequestResponse, PokemonResponse>, QueryFunctionContext>(
     ['paginated_pokemon_list', { url: `${ENDPOINT.pokemonList}?${setUrlQeueryParams({ offset: String(page), limit: String(offset) }).toString()}` }],
     _fetch,
     {
@@ -31,7 +32,7 @@ const QueryPaginated = (): JSX.Element => {
     <section>
       {(isLoading || isFetching) && <div className="text-warning">data loading....</div>}
       {isError && <div className="text-danger">ops... please try later...</div>}
-      {isSuccess && data?.results.length ? (
+      {isSuccess && data?.results && data?.results.length ? (
         data?.results.map((pokemon) => (
           <div key={pokemon.name} onClick={handleRedirect} data-value={pokemon} aria-hidden="true" className="row">
             <div className="col bg-light p-1 border hover-secondary">{pokemon.name}</div>

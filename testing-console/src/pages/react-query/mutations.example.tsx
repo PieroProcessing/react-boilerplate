@@ -58,7 +58,7 @@ const PostRequest = (): JSX.Element => {
       <section className="grid-wrapper">
         {(list.isLoading || list.isFetching) && <div className="text-warning">data loading....</div>}
         {list.isError && <div className="text-danger">ops... please try later...</div>}
-        {list.isSuccess && list.data && list.data.data.length ? (
+        {list.isSuccess && list.data.data && list.data.data.length ? (
           list.data.data.map((user) => (
             <div className="card" key={user.id}>
               <img src={user.avatar} className="card-img-top" alt="avatar" />

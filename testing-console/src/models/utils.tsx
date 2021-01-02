@@ -6,3 +6,5 @@ export type OptionalExceptFor<T, TRequired extends keyof T> = Partial<T> & Pick<
 export type FieldsType<T extends string> = {
   [x in T]: { value: string; isValid: boolean };
 };
+export type Without<T> = { [P in keyof T]?: undefined };
+export type XOR<T, U> = (Without<T> & U) | (Without<U> & T);
