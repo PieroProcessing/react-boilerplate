@@ -1,6 +1,5 @@
 import { useQuery, useMutation, QueryFunctionContext, QueryObserverResult, QueryClient, UseMutationResult } from 'react-query';
 import { RequestResponse, UrlQueryParamsModel, PostParams } from '../models';
-import { RequestData } from '../models/request';
 import _fetch from './fetch.service';
 import _post from './post.service';
 import setUrlQeueryParams from './serch-params.service';
@@ -9,27 +8,39 @@ const useList = (key: string, url: string, query: UrlQueryParamsModel): QueryObs
   return useQuery<RequestResponse, QueryFunctionContext>([key, { url: `${url}?${setUrlQeueryParams(query).toString()}` }], _fetch, {});
 };
 
-const usePost = (queryClient: QueryClient, key: string): UseMutationResult<RequestResponse, unknown, PostParams, RequestData> => {
+const usePost = (
+  queryClient: QueryClient,
+  key: string,
+): UseMutationResult<RequestResponse, unknown, PostParams, () => RequestResponse | undefined> => {
   return useMutation(_post, {
     onMutate: async (postParams: PostParams) => {
       await queryClient.cancelQueries(key);
       const snapshot = queryClient.getQueryData<RequestResponse>(key);
-      const newSnapshot = (old: RequestResponse): RequestResponse | undefined => {
-        console.log('old', old);
+      const oldSnapshot = { ...snapshot } as RequestResponse;
+
+      queryClient.setQueryData<(old: RequestResponse) => RequestResponse | undefined>(key, (old: RequestResponse): RequestResponse | undefined => {
         if (snapshot) {
-          snapshot.data.push(postParams.body);
+          snapshot.data.unshift(postParams.body);
+          snapshot.total = snapshot.data.length;
         }
         return snapshot;
+      });
+      return (): RequestResponse | undefined => {
+        // console.log('on return snapshot', snapshot);
+        return queryClient.setQueryData<RequestResponse>(key, oldSnapshot);
       };
-      queryClient.setQueryData<(old: RequestResponse) => RequestResponse | undefined>(key, newSnapshot);
-      return postParams.body; // this is the context
     },
-    // If the mutation fails, use the context returned from onMutate to roll back
-    onError: (err, variables, context) => {
-      console.log('🚀 ~ file: mutations.example.tsx ~ line 61 ~ err, variables, context', err, variables, context);
+    // If the mutation fails, use the context returned from onMutate to rollback
+    onError: (err, variables, rollback) => {
+      if (rollback) {
+        rollback();
+      }
     },
+
     // Always refetch after error or success:
-    onSettled: (newData, error, postParams, context): void => {},
+    onSettled: async (): Promise<void> => {
+      // await queryClient.invalidateQueries(key);
+    },
   });
 };
 
