@@ -1,12 +1,9 @@
+import { UserState } from '../../models';
 import type from '../types';
 
-export type UserState = {
-  username: string | null;
-};
-
-export const getUser = (username: string) => ({
+export const getUser = (username: string, payload: UserState) => ({
   type: type.GET_USERS,
-  payload: username,
+  payload,
 });
 
 export type UserAction = ReturnType<typeof getUser>;

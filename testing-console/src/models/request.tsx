@@ -1,3 +1,5 @@
+import { JsonPlaceholderModel } from './jsonplaceholder';
+
 export interface RequestData {
   id: string;
   email: string;
@@ -36,4 +38,12 @@ export interface PostBody {
 }
 export interface UrlQueryParamsModel {
   [key: string]: string;
+}
+export interface UserState {
+  username: string | null;
+  users: JsonPlaceholderModel[];
+  loading: boolean;
+  error: {
+    message: string;
+  } | null;
 }

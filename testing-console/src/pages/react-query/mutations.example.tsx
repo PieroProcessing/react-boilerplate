@@ -28,6 +28,10 @@ const PostRequest = (): JSX.Element => {
   useEffect((): (() => void) => {
     return (): Promise<void> => queryClient.cancelQueries(queryKeyPostRequest); /// check if necessary and dont cache data on component destroy;
   }, [queryClient]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+  };
   const handleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>): void => {
     // console.log('🚀 ~ file: App.tsx ~ line 42 ~ handleChange ~ handleChange', value);
   };
@@ -35,7 +39,8 @@ const PostRequest = (): JSX.Element => {
     const accumulator = currentTarget.getAttribute('value');
     setPage((old) => Math.max(old + Number(accumulator), 1));
   };
-  const handleMutations = ({ currentTarget }: React.MouseEvent<HTMLElement>): void => {
+  const handleMutations = (e: React.MouseEvent): void => {
+    const { currentTarget } = e;
     const newData = currentTarget.getAttribute('data-value');
     if (newData) {
       add.mutate({ url: ENDPOINT.requestList, body: JSON.parse(newData) as RequestData });
@@ -45,10 +50,10 @@ const PostRequest = (): JSX.Element => {
   return (
     <>
       <section className="p-3">
-        <form>
+        <form onSubmit={handleSubmit}>
           <label className="d-flex flex-column" htmlFor="pokemon">
-            <span>Choose your pokemon</span>
-            <input type="text" name="pokemon" onChange={handleChange} />
+            <span>Add User</span>
+            <input type="text" name="user" onChange={handleChange} />
           </label>
           <div className="btn btn-default btn-success" onClick={handleMutations} data-value={JSON.stringify(obj)} aria-hidden={true}>
             update
@@ -59,8 +64,8 @@ const PostRequest = (): JSX.Element => {
         {(list.isLoading || list.isFetching) && <div className="text-warning">data loading....</div>}
         {list.isError && <div className="text-danger">ops... please try later...</div>}
         {list.isSuccess && list.data.data && list.data.data.length ? (
-          list.data.data.map((user) => (
-            <div className="card" key={user.id}>
+          list.data.data.map((user, index) => (
+            <div className="card" key={`${user.id}-${Math.random() * 100}`}>
               <img src={user.avatar} className="card-img-top" alt="avatar" />
               <div className="card-body">
                 <h5 className="card-title">

@@ -1,9 +1,12 @@
-import { useState } from 'react';
+// import { EffectCallback, useState } from 'react';
+import useStateEffect from '../../Hooks/useStateEffect';
 import PostRequest from './mutations.example';
 import QueryPaginated from './use-query.paginated';
 
 const UseQueryExample = (): JSX.Element => {
-  const [example, setExample] = useState<boolean>(true);
+  const [example, setExample] = useStateEffect<boolean>(true, (s: boolean): void => {
+    console.log(s); // testing custom hook
+  });
 
   const handleSelect = ({ currentTarget }: React.MouseEvent<HTMLElement>): void => {
     setExample(currentTarget.getAttribute('value') === 'true');
