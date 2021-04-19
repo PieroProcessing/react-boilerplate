@@ -1,23 +1,16 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-
-// import { ReactQueryDevtoolsPanel } from 'react-query/devtools';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { Provider } from 'react-redux'; 
 import store from './redux/store';
 import App from './App';
 import './assets/scss/index.scss';
-
-const queryClient = new QueryClient();
+ 
 // import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <Provider store={store}>
-    <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <App />
-        {/* <ReactQueryDevtoolsPanel /> */}
-      </QueryClientProvider>
+    <StrictMode> 
+      <App />  
     </StrictMode>
   </Provider>,
   document.getElementById('root'),
