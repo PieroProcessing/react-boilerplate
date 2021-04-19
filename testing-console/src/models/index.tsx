@@ -1,6 +1,7 @@
 import { PokemonResponse } from './pokemon';
-import { RequestResponse, RequestData, PostResponseModel, PostParams, UrlQueryParamsModel, UserState } from './request';
+import { RequestResponse, RequestData, PostResponseModel,  UrlQueryParamsModel, UserState } from './request';
 import { JsonPlaceholderModel } from './jsonplaceholder';
+
 type Response = PokemonResponse | RequestResponse;
 
 export type {
@@ -9,7 +10,6 @@ export type {
   RequestResponse,
   RequestData,
   PostResponseModel,
-  PostParams,
   UrlQueryParamsModel,
   JsonPlaceholderModel,
   UserState,
