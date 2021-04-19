@@ -16,6 +16,9 @@
     // "react-hooks"
   ],
   "parser": "@typescript-eslint/parser",
+  "workingDirectories":[
+    "./testing-console"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json",
     "jsx": true,
