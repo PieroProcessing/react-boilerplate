@@ -1,4 +1,4 @@
-import { call, CallEffect, ForkEffect, put, PutEffect, takeEvery } from 'redux-saga/effects';
+import { call, CallEffect, ForkEffect, put, PutEffect, takeEvery } from '@redux-saga/core/effects';
 import { JsonPlaceholderModel } from '../../models';
 import type from '../types';
 
@@ -35,6 +35,7 @@ function* fetchUsers(): FetchGeneratorModel {
   }
 }
 export type UserSagaActionModel = ReturnType<typeof fetchUsers>;
+
 function* userSaga(): Generator<ForkEffect<{ type: string }>, void, unknown> {
   yield takeEvery(type.GET_USERS_REQUESTED, fetchUsers);
 }
