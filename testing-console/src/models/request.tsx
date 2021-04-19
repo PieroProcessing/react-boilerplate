@@ -28,10 +28,6 @@ export interface PostResponseModel {
   id: string;
   createdAt: Date;
 }
-export interface PostParams {
-  url: string;
-  body: RequestData;
-}
 export interface PostBody {
   name: string;
   job: string;
