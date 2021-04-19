@@ -16,9 +16,6 @@
     // "react-hooks"
   ],
   "parser": "@typescript-eslint/parser",
-  "workingDirectories":[
-    "./testing-console"
-  ],
   "parserOptions": {
     "project": "./tsconfig.json",
     "jsx": true,
@@ -45,6 +42,12 @@
       {
         "vars": "all",
         "args": "none"
+      }
+    ],
+    "@typescript-eslint/no-unused-expressions":[
+      "error",
+      {
+        "allowShortCircuit": true
       }
     ],
     "@typescript-eslint/no-explicit-any": [
