@@ -1,7 +1,9 @@
+import ListUsers from './components/ListUsers';
+
 const App = (): JSX.Element => {
   return (
-    <div className="container"> 
-      Main
+    <div className="container">
+      <ListUsers />
     </div>
   );
 };
