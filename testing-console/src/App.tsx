@@ -1,9 +1,14 @@
-import ListUsers from './components/ListUsers';
+import { BrowserRouter as Router } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import Routes from './routes';
 
 const App = (): JSX.Element => {
   return (
     <div className="container">
-      <ListUsers />
+      <Router>
+        <NavBar />
+        <Routes />
+      </Router>
     </div>
   );
 };
