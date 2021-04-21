@@ -2,10 +2,14 @@ import { JsonPlaceholderModel } from './jsonplaceholder';
 
 export interface RequestData {
   id: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  avatar: string;
+  email?: string;
+  first_name?: string;
+  last_name?: string;
+  avatar?: string;
+  name?: string;
+  year?: number;
+  color?: string;
+  pantone_value?: string;
 }
 
 export interface Support {
