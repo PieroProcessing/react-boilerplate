@@ -1,7 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TableModel } from '../../models';
-import { ResponseModel } from '../../models/table';
+import { RequestData, TableModel } from '../../models';
+import { FilterModel, ResponseModel } from '../../models/table';
 import { setFilter } from './filtersSlice';
+
+const isFiltered = (state: TableModel | null, action: PayloadAction<{ data: FilterModel; content: string }>): RequestData[] => {
+  const test = state
+    ? state[action.payload.content].data.filter((item) => Object.entries(action.payload.data).some(([key, value]) => item[key] === value))
+    : [];
+  return test.length ? test : state ? state[action.payload.content].data : [];
+};
 
 const tableSlice = createSlice({
   name: 'table',
@@ -19,9 +26,7 @@ const tableSlice = createSlice({
         ...state,
         [action.payload.content]: {
           ...(state ? state[action.payload.content] : {}),
-          data: state
-            ? state[action.payload.content].data.filter((item) => Object.entries(action.payload.data).some(([key, value]) => item[key] === value))
-            : [],
+          data: isFiltered(state, action),
         },
       }),
     );
