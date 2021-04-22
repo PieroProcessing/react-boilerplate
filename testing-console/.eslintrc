@@ -99,6 +99,7 @@
         ]
       }
     ],
+    "no-nested-ternary": "off",
     "no-return-await": "off",
     "no-void": "off",
     "no-underscore-dangle": "off",
