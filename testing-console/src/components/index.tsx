@@ -1,5 +1,5 @@
 import NavBar from './NavBar';
 import ListData from './ListData';
-import InputField from './InputField';
+import Input from './Input/Input';
 
-export { NavBar, ListData, InputField };
+export { NavBar, ListData, Input };

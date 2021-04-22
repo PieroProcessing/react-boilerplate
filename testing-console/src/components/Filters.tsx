@@ -1,7 +1,7 @@
 // interface Props {
 //     filters:
 
-import { InputField } from '.';
+import { Input } from '.';
 
 // }
 const inputs = [
@@ -20,7 +20,7 @@ const Filters = (): JSX.Element => {
   return (
     <form>
       {inputs.map((i) => (
-        <InputField key={i.name} {...i} />
+        <Input key={i.name} {...i} />
       ))}
     </form>
   );
