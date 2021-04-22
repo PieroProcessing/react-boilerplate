@@ -9,6 +9,7 @@ import {
 import { RootState } from '../../redux/reducers';
 import { getData } from '../../redux/reducers/tableSlice';
 import { ListData } from '../../components';
+import Filters from '../../components/Filters';
 
 const Table = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Table = (): JSX.Element => {
   return (
     <div>
       Table
+      <Filters />
       {data && data[content] && <ListData data={data[content].data} />}
     </div>
   );

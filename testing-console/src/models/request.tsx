@@ -1,6 +1,9 @@
 import { JsonPlaceholderModel } from './jsonplaceholder';
 
-export interface RequestData {
+interface IObjectKeys {
+  [key: string]: unknown;
+}
+export interface RequestData extends IObjectKeys {
   id: string;
   email?: string;
   first_name?: string;
