@@ -29,7 +29,25 @@
     }
   },
   "rules": {
-    "indent": "off",
+    "indent": "off", 
+    "@typescript-eslint/indent":[
+      "error",
+      2
+      // {
+      //   "ignoredNodes": [
+      //     "ConditionalExpression",
+      //     "flatTernaryExpressions",
+      //     "offsetTernaryExpressions"
+      //     // "CallExpression > FunctionExpression.callee > BlockStatement.body"
+      //   ]
+      // },
+      // {
+      //   "flatTernaryExpressions": false
+      // },
+      // {
+      //   "offsetTernaryExpressions": false
+      // }
+    ],
     "object-curly-spacing": [
       "warn",
       "always"
