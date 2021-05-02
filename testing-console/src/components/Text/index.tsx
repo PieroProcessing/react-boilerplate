@@ -1,18 +1,16 @@
 import { ChangeEvent, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setFilter } from '../redux/reducers/filtersSlice';
-import { InputBaseProps, ParamTypes } from '../../models';
+import { InputBaseProps } from '../../models';
+import { setInput } from '../../redux/reducers/formSlice';
 
 const Text = (props: InputBaseProps): JSX.Element => {
-  const { name, value } = props;
+  const { name, value, form } = props;
   const dispatch = useDispatch();
   const [state, setState] = useState(value);
-  const { content }: ParamTypes = useParams();
 
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>): void => {
     setState(target.value);
-    dispatch(setFilter({ content, data: { [target.name]: +target.value } }));
+    dispatch(setInput({ name: form, value: { [target.name]: target.value } }));
   };
   // const handleBlur = ({ target }: ChangeEvent<HTMLInputElement>): void => {
   // };

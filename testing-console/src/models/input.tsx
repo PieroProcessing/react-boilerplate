@@ -1,11 +1,18 @@
 // import { ChangeEvent, CSSProperties, ReactChildren } from 'react';
 import { RequestData } from './request';
+import { IObjectKeys } from './utils';
 
 export interface ResponseModel {
   [key: string]: unknown;
   data: RequestData[];
 }
 
+export interface FormModel extends IObjectKeys {
+  [key: string]: InputModel;
+}
+export interface InputModel extends IObjectKeys {
+  [key: string]: unknown;
+}
 // type InputType = 'text';
 //  'button' | 'checkbox' | 'color' | | 'time' | 'url' | 'week' | 'email'
 // | 'date'
@@ -30,6 +37,7 @@ export interface InputBaseProps {
   // id?: string;
   // label?: string;
   name: string;
+  form: string;
   // onBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
   // onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   // placeholder?: string;

@@ -1,4 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import formSlice from './formSlice';
 // import filtersSlice from './filtersSlice';
 // import tableSlice from './tableSlice';
 // import userSlice from './userSlice';
@@ -8,6 +9,7 @@ export const rootReducer = combineReducers({
   // users: userSlice,
   // table: tableSlice,
   // filters: filtersSlice,
+  form: formSlice,
   toast: toastSlice,
 });
 
