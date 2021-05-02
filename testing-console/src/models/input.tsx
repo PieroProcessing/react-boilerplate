@@ -1,4 +1,5 @@
 // import { ChangeEvent, CSSProperties, ReactChildren } from 'react';
+import { key } from 'io-ts/lib/DecodeError';
 import { RequestData } from './request';
 import { IObjectKeys } from './utils';
 
@@ -10,9 +11,13 @@ export interface ResponseModel {
 export interface FormModel extends IObjectKeys {
   [key: string]: InputModel;
 }
+export interface FieldModel extends IObjectKeys {
+  [key: string]: InputModel;
+}
 export interface InputModel extends IObjectKeys {
   [key: string]: unknown;
 }
+
 // type InputType = 'text';
 //  'button' | 'checkbox' | 'color' | | 'time' | 'url' | 'week' | 'email'
 // | 'date'
