@@ -1,11 +1,9 @@
 // import { ChangeEvent, CSSProperties, ReactChildren } from 'react';
+import { RequestData } from './request';
 
-export interface TableModel {
-  [key: string]: ResponseModel;
-}
 export interface ResponseModel {
   [key: string]: unknown;
-  data: unknown[];
+  data: RequestData[];
 }
 
 // type InputType = 'text';
@@ -36,12 +34,6 @@ export interface InputBaseProps {
   // onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   // placeholder?: string;
   // style?: CSSProperties;
-  type: string;
+  // type: string;
   value: string | number | readonly string[] | undefined;
-}
-export interface FiltersModel {
-  [key: string]: FilterModel;
-}
-export interface FilterModel {
-  [key: string]: unknown;
 }
