@@ -1,11 +1,10 @@
 import { Route, Switch } from 'react-router-dom';
-import Table from '../pages/Table';
 
 const Routes = (): JSX.Element => {
   return (
     <Switch>
       <Route exact path="/" component={(): JSX.Element => <div>home</div>} />
-      <Route path="/table/:content" component={Table} />
+      <Route path="/table/:content" component={(): JSX.Element => <div>table</div>} />
     </Switch>
   );
 };

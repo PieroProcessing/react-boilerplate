@@ -1,23 +1,6 @@
-import { PokemonResponse } from './pokemon';
-import { RequestResponse, RequestData, PostResponseModel, UrlQueryParamsModel, UserState } from './request';
-import { JsonPlaceholderModel } from './jsonplaceholder';
-import { TableModel, ParamTypes, ResponseModel, InputBaseProps, FiltersModel, FilterModel } from './table';
+import { TableModel, ResponseModel, InputBaseProps, FiltersModel, FilterModel } from './table';
+import { UserModel, UsersByIdModel } from './user';
+import { ToastModel } from './toast';
+import { ParamTypes, IObjectKeys } from './utils';
 
-type Response = PokemonResponse | RequestResponse;
-
-export type {
-  FiltersModel,
-  FilterModel,
-  InputBaseProps,
-  JsonPlaceholderModel,
-  ParamTypes,
-  PokemonResponse,
-  PostResponseModel,
-  RequestData,
-  RequestResponse,
-  Response,
-  ResponseModel,
-  TableModel,
-  UrlQueryParamsModel,
-  UserState,
-};
+export type { InputBaseProps, IObjectKeys, ParamTypes, ResponseModel, TableModel, FilterModel, FiltersModel, ToastModel, UserModel, UsersByIdModel };
