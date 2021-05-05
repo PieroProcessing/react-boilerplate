@@ -1,10 +1,13 @@
 import { RequestResponse, RequestData, PostResponseModel, UserState, FilterModel, FiltersModel } from './request';
 import { ResponseModel, InputBaseProps, FormModel, InputModel, FieldModel } from './input';
-import { ParamTypes } from './utils';
+import { ParamTypes, IObjectKeys } from './utils';
 import { ToastModel } from './toast';
-import { UserModel } from './user';
+import { UserModel, Person } from './user';
 
 export type {
+  Person,
+  // interfacePerson,
+  IObjectKeys,
   FilterModel,
   FiltersModel,
   FieldModel,
