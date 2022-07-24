@@ -1,9 +1,10 @@
 {
   "plugins": [
     "prettier",
-    "@typescript-eslint", 
-    "react", 
-    "react-hooks"
+    "@typescript-eslint",
+    "react",
+    "react-hooks",
+    "import"
   ],
   "extends": [
     "eslint:recommended",
@@ -33,7 +34,7 @@
     "object-curly-spacing": [
       "warn",
       "always"
-    ], 
+    ],
     "@typescript-eslint/semi": [
       "error"
     ],
@@ -44,7 +45,7 @@
         "args": "none"
       }
     ],
-    "@typescript-eslint/no-unused-expressions":[
+    "@typescript-eslint/no-unused-expressions": [
       "error",
       {
         "allowShortCircuit": true
@@ -56,15 +57,17 @@
         "ignoreRestArgs": true
       }
     ],
-    "@typescript-eslint/naming-convention":[
+    "@typescript-eslint/naming-convention": [
       "error",
       {
         "selector": "function",
-        "format": ["camelCase"],
+        "format": [
+          "camelCase"
+        ],
         "leadingUnderscore": "allow"
       }
     ],
-    "@typescript-eslint/consistent-type-definitions": "error", 
+    "@typescript-eslint/consistent-type-definitions": "error",
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-empty-interface": "error",
     "@typescript-eslint/explicit-function-return-type": "error",
@@ -87,27 +90,27 @@
     "no-console": [
       "error",
       {
-          "allow": [
-              "log",
-              "warn",
-              "dir",
-              "timeLog",
-              "assert",
-              "clear",
-              "count",
-              "countReset",
-              "group",
-              "groupEnd",
-              "table",
-              "dirxml",
-              "error",
-              "groupCollapsed",
-              "Console",
-              "profile",
-              "profileEnd",
-              "timeStamp",
-              "context"
-          ]
+        "allow": [
+          "log",
+          "warn",
+          "dir",
+          "timeLog",
+          "assert",
+          "clear",
+          "count",
+          "countReset",
+          "group",
+          "groupEnd",
+          "table",
+          "dirxml",
+          "error",
+          "groupCollapsed",
+          "Console",
+          "profile",
+          "profileEnd",
+          "timeStamp",
+          "context"
+        ]
       }
     ],
     "no-plusplus": [
@@ -115,7 +118,7 @@
       {
         "allowForLoopAfterthoughts": true
       }
-    ], 
+    ],
     "max-len": [
       "warn",
       {
@@ -129,7 +132,7 @@
     "react-hooks/rules-of-hooks": "error",
     "react/destructuring-assignment": "warn",
     "react/jsx-boolean-value": "off",
-    "react/jsx-key": "error",   
+    "react/jsx-key": "error",
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-wrap-multilines": "off",
